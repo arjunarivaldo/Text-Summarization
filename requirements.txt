@@ -1,0 +1,9 @@
+# requirements.txt
+torch
+transformers
+datasets
+scikit-learn
+pandas
+nltk
+evaluate
+rouge-score
