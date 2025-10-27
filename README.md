@@ -23,23 +23,23 @@ Model BERT kustom (k=2) berhasil mengalahkan baseline terkuat (Lead-2).
 
 1.  **Install Dependencies**
     ```bash
-    pip install -r requirements.txt
+    !pip install -r requirements.txt
     ```
 
 2.  **Langkah 1: Preprocessing Data**
     (Langkah ini akan memproses `liputan6_dataset_train.csv` dan `liputan6_dataset_test.csv` menjadi format `.arrow`)
     ```bash
-    python 01_preprocess.py
+    !python src/01_preprocess.py
     ```
 
 3.  **Langkah 2: Training Model**
     (Skrip ini akan melatih model pada 10% data dan menyimpannya ke `./bert-summarizer-best-model`)
     ```bash
-    python 02_train.py --use_sample --eval_steps 100
+    !python src/02_train.py --use_sample --eval_steps 100
     ```
 
 4.  **Langkah 3: Evaluasi Model**
     (Skrip ini akan memuat model terbaik dan mengevaluasinya pada test set)
     ```bash
-    python 03_evaluate.py
+    !python src/03_evaluate.py
     ```
