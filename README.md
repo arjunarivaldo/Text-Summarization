@@ -1,4 +1,4 @@
-# Proyek 2: Extractive Text Summarization dengan BERT
+# Project 2: Extractive Text Summarization dengan IndoBERT
 
 Proyek ini adalah implementasi dari model extractive summarization menggunakan arsitektur BERT kustom pada dataset Liputan6.
 
