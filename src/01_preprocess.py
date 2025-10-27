@@ -46,8 +46,8 @@ def _preprocess_batch(examples: Dict[str, List[Any]],
         try:
             sentences = nltk.sent_tokenize(cleaned_article)
         except LookupError:
-            print("Mengunduh tokenizer NLTK 'punkt'...")
-            nltk.download('punkt')
+            print("Mengunduh tokenizer NLTK 'punkt_tab'...")
+            nltk.download('punkt_tab')
             sentences = nltk.sent_tokenize(cleaned_article)
 
         if not sentences:
