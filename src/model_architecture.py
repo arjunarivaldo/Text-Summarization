@@ -31,7 +31,7 @@ class BertSumClassifier(BertPreTrainedModel):
         input_ids=None,
         attention_mask=None,
         token_type_ids=None,
-        sentence_pos_ids=None, # <--- Input kustom kita
+        sentence_pos_ids=None, # <--- Input kustom 
         labels=None,
         **kwargs
     ):
@@ -57,7 +57,7 @@ class BertSumClassifier(BertPreTrainedModel):
         
         loss = None
         if labels is not None:
-            # Kita gunakan 'ignore_index' -100 untuk token non-[CLS]
+            # Gunakan 'ignore_index' -100 untuk token non-[CLS]
             loss_fct = CrossEntropyLoss(ignore_index=-100) 
             flat_logits = logits.view(-1, self.config.num_labels)
             flat_labels = labels.view(-1)

@@ -4,16 +4,28 @@
 *.csv
 processed_liputan6_train/
 processed_liputan6_test/
+processed_liputan6_train_abs/
+processed_liputan6_test_abs/
 
 # Model & Log
 bert-summarizer-best-model/
 bert-summarizer-results/
+bert-summarizer-results_sample/
+bert-abstractive-best-model/
+bert-abstractive-results/
+bert-abstractive-results_sample/
 logs/
+logs_abs/
 
 # Python cache
 __pycache__/
 *.pyc
+*.pyo
 
 # IDE
 .vscode/
 .idea/
+
+# OS specific
+.DS_Store
+Thumbs.db
