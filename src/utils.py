@@ -16,7 +16,7 @@ def clean_article_text(text: str) -> str:
     cleaned_text = re.sub(pattern, "", text, count=1, flags=re.IGNORECASE)
     return cleaned_text.strip()
 
-def generate_baseline_summary(article_text: str, k: int = 3) -> str:
+def generate_baseline_summary(article_text: str, k: int = 2) -> str:
     """
     Menghasilkan ringkasan 'Lead-k' (hanya ambil k kalimat pertama).
     (Berdasarkan EDA Langkah 6)
