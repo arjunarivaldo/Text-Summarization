@@ -14,13 +14,11 @@ Eksperimen ini dijalankan menggunakan **10% dari total data training** untuk ite
 
 ## Hasil Akhir (pada 10% Sampel Test Set)
 
-| Model                       | ROUGE-1 | ROUGE-2 | ROUGE-L |
-| :-------------------------- | :-----: | :-----: | :-----: |
-| **Model Abstractive (T5)**  |  _TBD_  |  _TBD_  |  _TBD_  |
-| Model Extractive (BERT k=2) |  38.29  |  21.01  |  30.82  |
-| Baseline (Lead-2)           |  37.87  |  20.77  |  30.41  |
-
-_(Catatan: Hasil T5 akan terisi setelah langkah 2 & 3 dijalankan)_
+| Model                       |  ROUGE-1  |  ROUGE-2  |  ROUGE-L  |
+| :-------------------------- | :-------: | :-------: | :-------: |
+| **Model Abstractive (T5)**  | **39.19** | **21.69** | **32.36** |
+| Model Extractive (BERT k=2) |   38.29   |   21.01   |   30.82   |
+| Baseline (Lead-2)           |   37.87   |   20.77   |   30.41   |
 
 ## Cara Menjalankan Proyek
 
