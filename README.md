@@ -1,4 +1,4 @@
-# Proyek 2: Summarization Extractive vs. Abstractive
+# Project 2: Text Summarization
 
 Proyek ini membangun dan membandingkan dua arsitektur model Text Summarization pada dataset Liputan6:
 
