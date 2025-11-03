@@ -56,7 +56,7 @@ def _preprocess_batch_abstractive_custom(examples: Dict[str, List[Any]],
         try:
             sentences = nltk.sent_tokenize(cleaned_article)
         except LookupError:
-            nltk.download('punkt', quiet=True)
+            nltk.download('punkt_tab', quiet=True)
             sentences = nltk.sent_tokenize(cleaned_article)
 
         if not sentences:
