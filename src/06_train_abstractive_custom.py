@@ -94,7 +94,7 @@ def main(args):
 
         fp16=torch.cuda.is_available(),
         report_to="tensorboard",
-        disable_tqdm=False,
+        disable_tqdm=True,
     )
 
     # Trainer tidak berubah
