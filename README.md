@@ -1,62 +1,67 @@
 # Project 2: Text Summarization
 
-Proyek ini membangun dan membandingkan dua arsitektur model Text Summarization pada dataset Liputan6:
+Proyek ini membangun dan membandingkan tiga arsitektur model Text Summarization (dan satu baseline) pada dataset Liputan6 untuk menemukan metode peringkasan terbaik.
 
-1.  **Extractive (Kustom):** Model berbasis `indobert-base-p1` dengan _Sentence Position Embeddings_ kustom untuk memilih kalimat.
-2.  **Abstractive (T5):** Model berbasis `panggi/t5-base-indonesian-summarization-cased` yang di-fine-tune untuk menghasilkan ringkasan baru.
+1.  **Extractive (Kustom):** Model berbasis `indobert-base-p1` dengan _Sentence Position Embeddings_ kustom.
+2.  **Abstractive (Standar):** Model T5 standar (`panggi/t5-base-indonesian-summarization-cased`).
+3.  **Abstractive (Kustom):** Model T5 yang dimodifikasi dengan _Sentence Position Embeddings_.
 
-Eksperimen ini dijalankan menggunakan **10% dari total data training** untuk iterasi cepat.
+Seluruh eksperimen dijalankan menggunakan **10% dari total data training dan 10% dari data tes** untuk iterasi cepat.
 
 ## Arsitektur
 
-- **`src/`**: Berisi semua kode sumber yang dapat dieksekusi (`.py`).
-- **`notebooks/`**: Berisi notebook Analisis Data Eksploratif (`.ipynb`).
+- **`src/`**: Berisi semua kode sumber Python (`.py`) yang dapat dieksekusi untuk _preprocessing_, _training_, dan _evaluasi_.
+- **`notebooks/`**: Berisi _notebook_ Analisis Data Eksploratif (EDA) (`.ipynb`) yang menjadi dasar keputusan desain model.
 
 ## Hasil Akhir (pada 10% Sampel Test Set)
 
-| Model                       |  ROUGE-1  |  ROUGE-2  |  ROUGE-L  |
-| :-------------------------- | :-------: | :-------: | :-------: |
-| **Model Abstractive (T5)**  | **39.19** | **21.69** | **32.36** |
-| Model Extractive (BERT k=2) |   38.29   |   21.01   |   30.82   |
-| Baseline (Lead-2)           |   37.87   |   20.77   |   30.41   |
+Perbandingan skor ROUGE-2 (kesamaan frasa) dan BERTScore (kesamaan makna).
+
+| Model                        |  ROUGE-2  | BERTScore-F1 |
+| :--------------------------- | :-------: | :----------: |
+| **Abstractive (T5 Standar)** | **22.61** |  **77.30**   |
+| Abstractive (T5 Kustom)      |   22.39   |    77.21     |
+| Extractive (BERT Kustom)     |   21.67   |    76.13     |
+| Baseline (Lead-2)            |   21.43   |    76.01     |
 
 ## Cara Menjalankan Proyek
 
 1.  **Clone dan Setup**
 
     ```bash
-    git clone [https://github.com/USERNAME_ANDA/Text-Summarization.git](https://github.com/USERNAME_ANDA/Text-Summarization.git)
+    git clone [https://github.com/arjunarivaldo/Text-Summarization.git](https://github.com/arjunarivaldo/Text-Summarization.git)
     cd Text-Summarization
     pip install -r requirements.txt
     ```
 
     _Unggah `liputan6_dataset_train.csv` dan `liputan6_dataset_test.csv` ke dalam folder `Text-Summarization/`._
 
-2.  **Langkah 1: Jalankan Semua Preprocessing**
+2.  **Langkah 1: Jalankan Semua Preprocessing (Urut)**
+    _(Perintah ini akan membuat 6 folder data .arrow: `processed_...`)_
 
     ```bash
-    # (Ini akan membuat folder 'processed_liputan6_train' & 'processed_liputan6_test')
     python src/01_preprocess_extractive.py
-
-    # (Ini akan membuat folder 'processed_liputan6_train_abs' & 'processed_liputan6_test_abs')
-    python src/03_preprocess_abstractive.py
+    python src/02_preprocess_abstractive.py
+    python src/03_preprocess_abstractive_custom.py
     ```
 
-3.  **Langkah 2: Jalankan Semua Training (Gunakan GPU)**
-    _Gunakan `--use_sample` untuk berlatih dengan 10% data._
+3.  **Langkah 2: Jalankan Semua Training (Gunakan GPU & Urut)**
+    _(Gunakan `--use_sample` untuk berlatih dengan 10% data)_
 
     ```bash
     # (Ini akan membuat folder 'bert-summarizer-results_sample/best_model')
-    python src/02_train_extractive.py --use_sample --eval_steps 100
+    python src/04_train_extractive.py --use_sample --eval_steps 100
 
     # (Ini akan membuat folder 'bert-abstractive-results_sample/best_model')
-    python src/04_train_abstractive.py --use_sample --eval_steps 100 --batch_size 8
+    python src/05_train_abstractive.py --use_sample --eval_steps 100 --batch_size 8
+
+    # (Ini akan membuat folder 'bert-abstractive-results-custom_sample/best_model')
+    python src/06_train_abstractive_custom.py --use_sample --eval_steps 100 --batch_size 8
     ```
 
 4.  **Langkah 3: Jalankan Evaluasi Komparatif**
-    _Gunakan `--use_sample` untuk evaluasi cepat pada 10% test set._
-    _Pastikan path model di argumen default skrip sesuai dengan output training (misalnya, `bert-summarizer-results_sample/best_model`)._
+    _(Gunakan `--use_sample` untuk evaluasi cepat pada 10% test set)_
     ```bash
-    # (Skrip ini memuat kedua model dan baseline untuk perbandingan)
-    python src/05_evaluate_comparison.py --use_sample
+    # (Skrip ini memuat ke-3 model & baseline untuk perbandingan akhir)
+    python src/07_evaluate_comparison.py --use_sample
     ```

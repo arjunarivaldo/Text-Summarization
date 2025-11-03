@@ -1,10 +1,21 @@
-# requirements.txt
+# Core ML
 torch
-transformers
-datasets
+numpy
 scikit-learn
 pandas
-nltk
+
+# Hugging Face
+transformers
+datasets
 evaluate
-rouge-score
-sentencepiece
+accelerate  # Direkomendasikan untuk Trainer/fp16
+safetensors # Diperlukan untuk memuat model.safetensors
+
+# NLP Utilities
+nltk
+bert_score
+rouge-score # Diperlukan oleh evaluate.load('rouge')
+sentencepiece # Sering diperlukan untuk tokenisasi metrik
+
+# System Utilities
+psutil # Digunakan di 04_preprocess_abstractive.py
