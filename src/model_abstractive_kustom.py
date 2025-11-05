@@ -52,7 +52,7 @@ class T5WithSentencePosition(T5ForConditionalGeneration):
         use_cache = use_cache if use_cache is not None else self.config.use_cache
         return_dict = return_dict if return_dict is not None else self.config.use_return_dict
 
-        # --- KUSTOMISASI INTI DI SINI (HANYA JIKA ENCODER BERJALAN) ---
+        # --- KUSTOMISASI INTI (HANYA JIKA ENCODER BERJALAN) ---
         if encoder_outputs is None:
             # 1. Dapatkan embedding kata standar dari T5
             if inputs_embeds is None:
@@ -71,7 +71,7 @@ class T5WithSentencePosition(T5ForConditionalGeneration):
 
             # 4. Masukkan embedding GABUNGAN ke ENCODER
             encoder_outputs = self.encoder(
-                inputs_embeds=combined_embeddings, # <<< Ini kuncinya
+                inputs_embeds=combined_embeddings, # <<< KEY CHANGE
                 attention_mask=attention_mask,
                 head_mask=head_mask,
                 output_attentions=output_attentions,
@@ -86,7 +86,7 @@ class T5WithSentencePosition(T5ForConditionalGeneration):
         if labels is not None and decoder_input_ids is None and decoder_inputs_embeds is None:
             decoder_input_ids = self._shift_right(labels)
 
-        # Bagian Decoder (tidak diubah)
+        # Bagian Decoder 
         decoder_outputs = self.decoder(
             input_ids=decoder_input_ids,
             attention_mask=decoder_attention_mask,
@@ -109,7 +109,7 @@ class T5WithSentencePosition(T5ForConditionalGeneration):
 
         lm_logits = self.lm_head(sequence_output)
 
-        # Perhitungan Loss (tidak diubah)
+        # Perhitungan Loss
         loss = None
         if labels is not None:
             loss_fct = CrossEntropyLoss(ignore_index=-100)

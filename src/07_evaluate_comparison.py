@@ -1,5 +1,4 @@
 # src/05_evaluate_comparison.py
-# (DIMODIFIKASI untuk mengevaluasi 3 model + baseline)
 
 import torch
 import nltk
@@ -26,10 +25,10 @@ from utils import clean_article_text, generate_baseline_summary
 # --- Konfigurasi ---
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
-# Path default ke model-model terbaik Anda
+# Path default ke model-model terbaik
 DEFAULT_EXTRACTIVE_PATH = './bert-summarizer-best-model'
 DEFAULT_ABSTRACTIVE_PATH = './bert-abstractive-best-model'
-# Path BARU untuk model kustom
+# Path untuk model kustom
 DEFAULT_ABSTRACTIVE_CUSTOM_PATH = './bert-abstractive-results-custom_sample/best_model'
 DEFAULT_TEST_FILE = "liputan6_dataset_test.csv"
 
@@ -40,10 +39,8 @@ ABSTRACTIVE_TOKENIZER_NAME = 'panggi/t5-base-indonesian-summarization-cased'
 EXTRACTIVE_K = 2 
 BASELINE_K = 2 
 
-# --- Fungsi Prediksi Extractive (Tidak Berubah) ---
+# --- Fungsi Prediksi Extractive ---
 def predict_extractive_summary(article_text: str, model, tokenizer, k: int) -> str:
-    # ... (Salin/Tempel fungsi lengkap dari file 05_evaluate_abstractive.py Anda)
-    # (Pastikan NLTK.download('punkt') ada di 'except')
     if not isinstance(article_text, str) or not article_text: return ""
     cleaned_article = clean_article_text(article_text)
     try:
@@ -102,10 +99,8 @@ def predict_extractive_summary(article_text: str, model, tokenizer, k: int) -> s
 
     return " ".join(final_sentences)
 
-# --- Fungsi Prediksi Abstractive Standar (Tidak Berubah) ---
+# --- Fungsi Prediksi Abstractive Standar ---
 def predict_abstractive_summary(article_text: str, model, tokenizer) -> str:
-    # ... (Salin/Tempel fungsi lengkap dari file 05_evaluate_abstractive.py Anda)
-    # (Pastikan prefix "ringkas: " ada)
     if not isinstance(article_text, str) or not article_text: return ""
     prefix = "ringkas: "
     inputs_text = prefix + article_text
@@ -173,7 +168,7 @@ def predict_abstractive_custom_summary(article_text: str, model, tokenizer) -> s
     sent_pos_ids = torch.tensor([article_sent_pos_ids]).to(DEVICE)
 
     # 5. --- TRIK GENERASI KUSTOM ---
-    # Kita harus menjalankan encoder secara manual untuk memasukkan `sentence_pos_ids`
+    # Menjalankan encoder secara manual untuk memasukkan `sentence_pos_ids`
     with torch.no_grad():
         # Dapatkan embedding
         word_embeddings = model.encoder.embed_tokens(input_ids)
@@ -221,7 +216,7 @@ def main(args):
     tokenizer_abstractive_custom = T5TokenizerFast.from_pretrained(ABSTRACTIVE_TOKENIZER_NAME) 
     model_abstractive_custom.eval()
 
-    # ... (Kode muat test_dataset & handle sampling SAMA) ...
+    # --- 2. Muat Test Set ---
     print(f"Memuat test set dari {args.test_file}...")
     full_test_dataset = load_dataset('csv', data_files={'test': args.test_file})['test']
     full_test_dataset = full_test_dataset.filter(lambda x: x['clean_article'] is not None and x['clean_summary'] is not None)

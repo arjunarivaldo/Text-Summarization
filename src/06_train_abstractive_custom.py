@@ -1,5 +1,4 @@
 # src/04_train_abstractive.py
-# (DIMODIFIKASI untuk melatih model kustom)
 
 import torch
 import numpy as np
@@ -63,7 +62,7 @@ def main(args):
         print(f"Error memuat model/tokenizer {MODEL_NAME}: {e}")
         return
 
-    # Data Collator tidak berubah
+    # Data Collator sangat PENTING untuk Seq2Seq
     data_collator = DataCollatorForSeq2Seq(
         tokenizer,
         model=model,
@@ -97,7 +96,6 @@ def main(args):
         disable_tqdm=True,
     )
 
-    # Trainer tidak berubah
     # Trainer akan otomatis melewatkan 'sentence_pos_ids' dari batch ke model
     trainer = Trainer(
         model=model,

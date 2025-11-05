@@ -1,5 +1,4 @@
 # src/03_preprocess_abstractive.py
-# (DIMODIFIKASI untuk membuat sentence_pos_ids)
 
 import pandas as pd
 import nltk
@@ -39,7 +38,7 @@ def _preprocess_batch_abstractive_custom(examples: Dict[str, List[Any]],
 
     max_sent_pos = 128 # Sesuai dengan model kustom
 
-    # --- LOGIKA PREPROCESSING BARU (Mirip Extractive) ---
+    # --- LOGIKA PREPROCESSING ---
     for article_text in inputs_text:
         article_input_ids = []
         article_sent_pos_ids = []

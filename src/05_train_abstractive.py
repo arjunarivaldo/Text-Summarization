@@ -16,7 +16,7 @@ from transformers import (
 MODEL_NAME = 'panggi/t5-base-indonesian-summarization-cased'
 PROCESSED_TRAIN_PATH = './processed_liputan6_train_abs' # Path data abstractive
 OUTPUT_DIR = './bert-abstractive-results'
-BEST_MODEL_DIR = './bert-abstractive-best-model' # Path model BARU
+BEST_MODEL_DIR = './bert-abstractive-best-model'
 
 # --- Fungsi Utama Training ---
 def main(args):
@@ -71,9 +71,9 @@ def main(args):
         
         load_best_model_at_end=True,
         metric_for_best_model="loss", # Monitor 'loss' krn ROUGE lambat di-eval
-        greater_is_better=False,     # 'loss' lebih baik jika lebih kecil
+        greater_is_better=False,      # 'loss' lebih baik jika lebih kecil
         
-        fp16=True,  # Mengoptimalkan A100
+        fp16=True,  # Mengoptimalkan Tensor Cores
         report_to="tensorboard",
         disable_tqdm=True
     )

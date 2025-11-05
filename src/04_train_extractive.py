@@ -86,7 +86,7 @@ def main(args):
     print("Memuat config dan model kustom...")
     config = BertConfig.from_pretrained(
         MODEL_NAME,
-        num_labels=2 # Perbaikan error `num_labels`
+        num_labels=2 
     )
     model = BertSumClassifier.from_pretrained(MODEL_NAME, config=config)
     
@@ -111,7 +111,7 @@ def main(args):
         metric_for_best_model="f1",
         greater_is_better=True,
         
-        fp16=True,  # Mengoptimalkan A100
+        fp16=True,  # Mengoptimalkan Tensor Cores
         report_to="tensorboard"
     )
 
