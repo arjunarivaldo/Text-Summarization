@@ -19,10 +19,10 @@ Perbandingan skor ROUGE-2 (kesamaan frasa) dan BERTScore (kesamaan makna).
 
 | Model                        |  ROUGE-2  | BERTScore-F1 |
 | :--------------------------- | :-------: | :----------: |
-| **Abstractive (T5 Standar)** | **22.61** |  **77.30**   |
-| Abstractive (T5 Kustom)      |   22.39   |    77.21     |
-| Extractive (BERT Kustom)     |   21.67   |    76.13     |
-| Baseline (Lead-2)            |   21.43   |    76.01     |
+| **Abstractive (T5 Standar)** | **22.59** |  **77.30**   |
+| Abstractive (T5 Kustom)      |   22.38   |    77.21     |
+| Extractive (BERT Kustom)     |   21.65   |    76.15     |
+| Baseline (Lead-2)            |   21.41   |    76.01     |
 
 ## Cara Menjalankan Proyek
 
@@ -37,7 +37,7 @@ Perbandingan skor ROUGE-2 (kesamaan frasa) dan BERTScore (kesamaan makna).
     _Unggah `liputan6_dataset_train.csv` dan `liputan6_dataset_test.csv` ke dalam folder `Text-Summarization/`._
 
 2.  **Langkah 1: Jalankan Semua Preprocessing (Urut)**
-    _(Perintah ini akan membuat 6 folder data .arrow: `processed_...`)_
+    _(Perintah ini akan membuat 6 folder data .arrow: `processed_...`)\_
 
     ```bash
     python src/01_preprocess_extractive.py
