@@ -29,9 +29,9 @@ Perbandingan skor ROUGE-2 (kesamaan frasa) dan BERTScore (kesamaan makna).
 1.  **Clone dan Setup**
 
     ```bash
-    git clone [https://github.com/arjunarivaldo/Text-Summarization.git](https://github.com/arjunarivaldo/Text-Summarization.git)
-    cd Text-Summarization
-    pip install -r requirements.txt
+    !git clone https://github.com/arjunarivaldo/Text-Summarization.git
+    %cd Text-Summarization
+    %pip install -r requirements.txt
     ```
 
     _Unggah `liputan6_dataset_train.csv` dan `liputan6_dataset_test.csv` ke dalam folder `Text-Summarization/`._
@@ -40,9 +40,9 @@ Perbandingan skor ROUGE-2 (kesamaan frasa) dan BERTScore (kesamaan makna).
     _(Perintah ini akan membuat 6 folder data .arrow: `processed_...`)\_
 
     ```bash
-    python src/01_preprocess_extractive.py
-    python src/02_preprocess_abstractive.py
-    python src/03_preprocess_abstractive_custom.py
+    !python src/01_preprocess_extractive.py
+    !python src/02_preprocess_abstractive.py
+    !python src/03_preprocess_abstractive_custom.py
     ```
 
 3.  **Langkah 2: Jalankan Semua Training (Gunakan GPU & Urut)**
@@ -50,18 +50,18 @@ Perbandingan skor ROUGE-2 (kesamaan frasa) dan BERTScore (kesamaan makna).
 
     ```bash
     # (Ini akan membuat folder 'bert-summarizer-results_sample/best_model')
-    python src/04_train_extractive.py --use_sample --eval_steps 100
+    !python src/04_train_extractive.py --use_sample --eval_steps 100
 
     # (Ini akan membuat folder 'bert-abstractive-results_sample/best_model')
-    python src/05_train_abstractive.py --use_sample --eval_steps 100 --batch_size 8
+    !python src/05_train_abstractive.py --use_sample --eval_steps 100 --batch_size 8
 
     # (Ini akan membuat folder 'bert-abstractive-results-custom_sample/best_model')
-    python src/06_train_abstractive_custom.py --use_sample --eval_steps 100 --batch_size 8
+    !python src/06_train_abstractive_custom.py --use_sample --eval_steps 100 --batch_size 8
     ```
 
 4.  **Langkah 3: Jalankan Evaluasi Komparatif**
     _(Gunakan `--use_sample` untuk evaluasi cepat pada 10% test set)_
     ```bash
     # (Skrip ini memuat ke-3 model & baseline untuk perbandingan akhir)
-    python src/07_evaluate_comparison.py --use_sample
+    !python src/07_evaluate_comparison.py --use_sample
     ```
